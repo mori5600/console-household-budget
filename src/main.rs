@@ -1,4 +1,5 @@
 mod amount;
+mod category;
 
 fn main() {
     let amount = amount::Amount::new(-10);
