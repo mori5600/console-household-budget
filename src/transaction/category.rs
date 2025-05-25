@@ -7,7 +7,7 @@ pub enum CategoryError {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Category(String);
+pub struct Category(pub String);
 
 impl Category {
     pub fn new(value: String) -> Result<Self, CategoryError> {
@@ -22,10 +22,6 @@ impl Category {
 
         Ok(Self(value))
     }
-
-    pub fn value(&self) -> &str {
-        &self.0
-    }
 }
 
 #[cfg(test)]
@@ -36,7 +32,7 @@ mod tests {
     fn test_create_category() {
         let category = Category::new("Food".to_string());
         assert!(category.is_ok());
-        assert_eq!(category.unwrap().value(), "Food");
+        assert_eq!(category.unwrap().0, "Food");
     }
 
     #[test]

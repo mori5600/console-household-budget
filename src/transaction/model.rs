@@ -58,8 +58,8 @@ mod tests {
             transaction.date,
             NaiveDate::from_ymd_opt(2024, 3, 15).unwrap()
         );
-        assert_eq!(transaction.amount.value(), 1000);
-        assert_eq!(transaction.category.value(), "Food");
-        assert_eq!(transaction.description.value(), "Grocery shopping");
+        assert_eq!(transaction.amount.0, 1000);
+        assert_eq!(transaction.category.0, "Food");
+        assert_eq!(transaction.description.0, "Grocery shopping");
     }
 }

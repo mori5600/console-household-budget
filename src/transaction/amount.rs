@@ -5,7 +5,7 @@ pub enum AmountError {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Amount(i64);
+pub struct Amount(pub i64);
 
 impl Amount {
     pub fn new(value: i64) -> Result<Self, AmountError> {
@@ -14,10 +14,6 @@ impl Amount {
         }
 
         Ok(Amount(value))
-    }
-
-    pub fn value(&self) -> i64 {
-        self.0
     }
 }
 
@@ -29,7 +25,7 @@ mod tests {
     fn test_create_amount() {
         let amount = Amount::new(10);
         assert!(amount.is_ok());
-        assert_eq!(amount.unwrap().value(), 10);
+        assert_eq!(amount.unwrap().0, 10);
     }
 
     #[test]
@@ -49,6 +45,6 @@ mod tests {
     #[test]
     fn test_amount_value() {
         let amount = Amount::new(20).unwrap();
-        assert_eq!(amount.value(), 20);
+        assert_eq!(amount.0, 20);
     }
 }

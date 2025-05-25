@@ -7,7 +7,7 @@ pub enum DescriptionError {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Description(String);
+pub struct Description(pub String);
 
 impl Description {
     pub fn new(value: String) -> Result<Self, DescriptionError> {
@@ -22,10 +22,6 @@ impl Description {
 
         Ok(Self(value))
     }
-
-    pub fn value(&self) -> &str {
-        &self.0
-    }
 }
 
 #[cfg(test)]
@@ -36,7 +32,8 @@ mod tests {
     fn test_create_description() {
         let description = Description::new("Grocery shopping at Walmart".to_string());
         assert!(description.is_ok());
-        assert_eq!(description.unwrap().value(), "Grocery shopping at Walmart");
+        let description = description.unwrap();
+        assert_eq!(description.0, "Grocery shopping at Walmart");
     }
 
     #[test]
