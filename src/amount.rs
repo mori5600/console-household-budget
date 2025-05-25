@@ -1,10 +1,16 @@
+#[derive(Debug, thiserror::Error)]
+pub enum AmountError {
+    #[error("Amount cannot be negative")]
+    NegativeAmount(i64),
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Amount(i64);
 
 impl Amount {
-    pub fn new(value: i64) -> Result<Self, String> {
+    pub fn new(value: i64) -> Result<Self, AmountError> {
         if value < 0 {
-            return Err("Amount cannot be negative".to_string());
+            return Err(AmountError::NegativeAmount(value));
         }
 
         Ok(Amount(value))
@@ -30,7 +36,7 @@ mod tests {
     fn test_create_negative_amount() {
         let amount = Amount::new(-5);
         assert!(amount.is_err());
-        assert_eq!(amount.err().unwrap(), "Amount cannot be negative");
+        assert!(matches!(amount, Err(AmountError::NegativeAmount(_))));
     }
 
     #[test]
