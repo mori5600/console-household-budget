@@ -1,6 +1,6 @@
 mod amount;
 mod category;
-
+mod description;
 fn main() {
     let amount = amount::Amount::new(10);
     match amount {

@@ -15,7 +15,6 @@ impl Category {
             return Err(CategoryError::EmptyCategory);
         }
 
-        // オプション: 最大長の制限を追加
         const MAX_LENGTH: usize = 50;
         if value.len() > MAX_LENGTH {
             return Err(CategoryError::TooLong(value.len(), MAX_LENGTH));
